@@ -44,7 +44,8 @@ module.exports = function(grunt) {
         extensions: ['js', 'css']
       },
       // friendly beep on error
-      beep: false
+      beep: false,
+	  errorStack: true
     });
     done = this.async();
     esteWatchTaskIsRunning = false;
@@ -139,7 +140,7 @@ module.exports = function(grunt) {
   var keepThisTaskRunForeverViaHideousHack = function() {
     var createLog = function(isWarning) {
       return function(e) {
-        var message = typeof e == 'string' ? e : e.message;
+        var message = typeof e == 'string' ? e : (options.errorStack && e.stack) ? e.stack : e.message ;
         var line = options.beep ? '\x07' : '';
         if (isWarning) {
           line += ('Warning: ' + message).yellow;
