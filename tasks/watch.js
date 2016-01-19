@@ -170,7 +170,7 @@ module.exports = function(grunt) {
     var ignoredFiles = filesChangedWithinWatchTask.dispatcher;
     filesChangedWithinWatchTask = [];
     waitingFiles.forEach(function(filepath) {
-      if (filepath == ignoredFiles)
+      if (filepath.match(ignoredFiles))
         return;
       onFileChange(filepath);
     });
