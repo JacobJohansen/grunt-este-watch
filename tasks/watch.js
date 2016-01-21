@@ -197,6 +197,12 @@ module.exports = function(grunt) {
     // Normalize \\ paths to / paths. Yet another Windows fix.
     filepath = filepath.replace(/\\/g, '/');
 
+    var minimatchOptions = {
+      dot: true,
+      matchBase: true, 
+      nocomment: true, 
+      nonegate: true
+    };
     if (grunt.file.isMatch(minimatchOptions, options.ignoredFiles, filepath))
       return;
 
