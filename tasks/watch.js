@@ -196,6 +196,10 @@ module.exports = function(grunt) {
     var filepath = path.join(dir || '', filename || '');
     // Normalize \\ paths to / paths. Yet another Windows fix.
     filepath = filepath.replace(/\\/g, '/');
+
+    if (grunt.file.isMatch(minimatchOptions, options.ignoredFiles, filepath))
+      return;
+
     // fs.statSync fails on deleted symlink dir with "Abort trap: 6" exception
     // https://github.com/bevry/watchr/issues/42
     // https://github.com/joyent/node/issues/4261
